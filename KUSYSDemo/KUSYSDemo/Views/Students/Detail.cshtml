@@ -1,0 +1,31 @@
+﻿@model KUSYSDemo.Models.Entity.Student
+
+
+<div>
+
+    <div class="modal-header">
+        <h4 class="modal-title" id="myModalLabel">Öğrenci Detay</h4>
+    </div>
+
+    <hr />
+    <dl class="dl-horizontal">
+        <dt>
+            Adı :
+        </dt>
+        <dd>
+            @Html.Label(@Model.FirstName)
+        </dd>
+        <dt>
+            Soyadı :
+        </dt>
+        <dd>
+            @Html.Label(@Model.LastName)
+        </dd>
+        <dt>
+            Doğum Tarihi :
+        </dt>
+        <dd>
+            @Html.Label(@Model.BirthDate.ToString("dd-MM-yyyy"))
+        </dd>
+    </dl>
+</div>  

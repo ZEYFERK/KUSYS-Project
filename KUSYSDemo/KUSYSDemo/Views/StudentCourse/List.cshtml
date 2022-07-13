@@ -1,0 +1,87 @@
+﻿@model IEnumerable<KUSYSDemo.Models.Entity.StudentCourses>
+
+@{
+    var courseid = "";
+    int i = 1;
+}
+
+<style>
+    th {
+        text-align: center;
+    }
+</style>
+
+<div class="text-center">
+
+    <div class="row justify-content-left">
+        <div class="col-md-12">
+            @using (Html.BeginForm())
+            {
+                <div class="col-md-6">
+                </div>
+                <div class="col-md-2">
+                    @Html.Label("Eklenebilecek Kurslar")
+                </div>
+                <div class="col-md-3">
+                    @Html.DropDownListFor(m => m.FirstOrDefault().CourseId,(List<SelectListItem>)ViewBag.Courses,"-- Lütfen Seçiniz --",new {@class="form-control",@onChange="selectedtext(this)"})
+                </div>
+                <div class="col-md-1">
+                    <input class="form-control btn btn-primary rounded submit px-3" type="submit" value="Ekle">
+                </div>
+            }
+        </div>
+    </div>
+
+    <h1 style="margin-top:50px">Öğrencinin Aldığı Kurslar</h1>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th scope="col">#</th>
+                <th scope="col">
+                    @Html.Label("Öğrenci Adı")
+                </th>
+                <th scope="col">
+                    @Html.Label("Kurs Adı")
+                </th>
+                <th scope="col">
+                    @Html.Label("Kurs Kodu")
+                </th>
+                <th scope="col"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <th scope="row">@Convert.ToInt32(i)</th>
+
+                    <td>
+                        @Html.DisplayFor(modelItem => item.StudentName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CourseId)
+                    </td>
+                    <td>
+                        <button class="btn btn-danger btn-md" type="button" onclick="location.href='@Url.Action("Delete", "StudentCourse",item)'">
+                            Kursu Sil
+                        </button>
+                    </td>
+                </tr>
+                i++;
+            }
+        </tbody>
+    </table>
+</div>
+<script>
+    function selectedtext(ddlitem) {
+        var selectedValue = ddlitem.value;
+        var selectedText = ddlitem.options[ddlitem.selectedIndex].innerHTML;
+    @courseid = selectedValue;
+        console.log(courseid)
+    }
+
+</script>
